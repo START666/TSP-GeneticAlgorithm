@@ -1,5 +1,8 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by Xuhao Chen on 2016/10/26.
@@ -10,6 +13,9 @@ public class TSP {
     public Integer numOfCities = 0;
     public static City[] citiesList;
     public EdgeWeightType edgeWeightType;
+
+
+    private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
 
     public enum EdgeWeightType{
@@ -45,15 +51,17 @@ public class TSP {
         public void readFile(String filePath) {
             try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                 String line;
+                int lineNumber=0;
 
                 boolean EOF = false;
                 while(!EOF){
                     line = br.readLine();
                     file.add(line);
 
-                    setMetadata(line);
+                    setMetadata(line,lineNumber);
 
                     if(line.contains("EOF")) EOF = true;
+                    lineNumber++;
                 }
 
             }catch (FileNotFoundException fileNotFoundException){
@@ -66,7 +74,7 @@ public class TSP {
             }
         }
 
-        private void setMetadata(String aLine){
+        private void setMetadata(String aLine, int lineNumber){
 
             if(aLine.contains("DIMENSION")){  //pair DIMENSION
                 int position = aLine.length()-1;
@@ -88,6 +96,9 @@ public class TSP {
                 if(aLineSub.equals("ATT")) edgeWeightType = EdgeWeightType.ATT;
                 else if(aLineSub.equals("EXPLICIT")) edgeWeightType = EdgeWeightType.EXPLICIT;
             }
+            else if(aLine.contains("NODE_COORD_SECTION")){
+                cityStartLine = lineNumber+1;
+            }
         }
     }
 
@@ -98,14 +109,47 @@ public class TSP {
 
         fp.readFile(fileName);
 
-        for(int i=0;i<file.size();i++){
-            System.out.println(file.get(i));
+        buildCityList();
+
+
+
+//        for(int i=0;i<file.size();i++){
+//            System.out.println(file.get(i));
+//        }
+//
+//        System.out.println("numOfCities = " + numOfCities);
+//        System.out.println("edgeWeightType = " + edgeWeightType.toString());
+
+
+    }
+
+    private void buildCityList(){
+        citiesList = new City[numOfCities];
+        for(int i = cityStartLine;i<file.size()-1;i++){
+            String line = file.get(i);
+
+            int tag;
+            int xCoord;
+            int yCoord;
+
+            Queue<Integer> spaceLocation = new LinkedList<>();
+            for(int j = 0;j<line.length();j++){
+                if(line.charAt(j) == (char)32){
+                    spaceLocation.offer(j);
+                }
+            }
+
+            int first=spaceLocation.poll();
+            int second=spaceLocation.poll();
+
+            tag =  Integer.parseInt(line.substring(0,first));
+            xCoord = Integer.parseInt(line.substring(first+1,second));
+            yCoord = Integer.parseInt(line.substring(second+1,line.length()));
+
+            citiesList[tag-1] = new City(tag,xCoord,yCoord);
+            System.out.println("City "+tag+" has been saved" );
+
         }
-
-        System.out.println("numOfCities = " + numOfCities);
-        System.out.println("edgeWeightType = " + edgeWeightType.toString());
-
-
     }
 
     public static void main(String args[]){new TSP();}
