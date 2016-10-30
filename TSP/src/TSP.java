@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -12,11 +11,19 @@ public class TSP {
     public final static String fileName = "/Users/START_Eric/myCode/IntellijCode/TSPGeneticAlgorithm/TSP/TSP/src/att48.tsp";
     public Integer numOfCities = 0;
     public static City[] citiesList;
+    public static Queue<Edge> edgesList;
     public EdgeWeightType edgeWeightType;
 
 
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
+    private Thread readerThread;
+    private Thread outputThread;
+    private Thread displayThread;
+    private Thread calculateThread;
+    private Object lock = new Object();
+
+    private boolean getOutput = false;
 
     public enum EdgeWeightType{
         ATT,
@@ -102,15 +109,89 @@ public class TSP {
         }
     }
 
+    private class FileReaderRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock) {
+                FileProcessor fp = new FileProcessor();
+
+                fp.readFile(fileName);
+
+                buildCityList();
+                lock.notify();
+
+                System.out.println("Total "+numOfCities+" number of cities have been saved.");
+
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("Thread done.");
+            }
+
+        }
+    }
+
+    private class OutputRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock) {
+                lock.notify();
+                for (int i = 0; i < citiesList.length; i++) {
+                    City tmp = citiesList[i];
+                    System.out.println("City " + tmp.tag + " :(" + tmp.x + ", " + tmp.y + ")");
+                }
+
+            }
+
+        }
+    }
+
+    private class DisplayRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock){
+                Frame frame = new Frame(900,600,citiesList,edgesList);
+            }
+        }
+    }
+
+    private class CalculateRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock){
+                for(int i=0;i<citiesList.length;i++){
+                    City tmp1 = citiesList[i];
+                    City tmp2;
+                    if(i==citiesList.length-1) tmp2 = citiesList[0];
+                    else tmp2 = citiesList[i+1];
+
+                    edgesList.offer(new Edge(tmp1.tag, tmp1.x, tmp1.y, tmp2.tag, tmp2.x, tmp2.y));
+                }
+            }
+        }
+    }
+
 
     public TSP(){
 
-        FileProcessor fp = new FileProcessor();
+        edgesList = new LinkedList<>();
 
-        fp.readFile(fileName);
+        readerThread = new Thread(new FileReaderRunnable());
+        if(getOutput) outputThread = new Thread(new OutputRunnable());
+        displayThread = new Thread(new DisplayRunnable());
+        calculateThread = new Thread(new CalculateRunnable());
 
-        buildCityList();
-
+        readerThread.start();
+        if(getOutput) outputThread.start();
+        calculateThread.start();
+        displayThread.start();
 
 
 //        for(int i=0;i<file.size();i++){
@@ -147,7 +228,7 @@ public class TSP {
             yCoord = Integer.parseInt(line.substring(second+1,line.length()));
 
             citiesList[tag-1] = new City(tag,xCoord,yCoord);
-            System.out.println("City "+tag+" has been saved" );
+//            System.out.println("City "+tag+" has been saved" );
 
         }
     }
