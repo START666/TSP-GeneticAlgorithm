@@ -6,7 +6,7 @@ import java.util.*;
  * Created by Xuhao Chen on 2016/10/30.
  */
 public class Frame extends JFrame {
-    public Frame(int width, int height, City[] citiesList, Queue<Edge> edgesList){
+    public Frame(int width, int height, City[] citiesList,Integer[] edgesList){
         this.getContentPane().add(new Panel(citiesList,edgesList));
         setTitle("Display Panel");
         setSize(width,height);
@@ -16,9 +16,9 @@ public class Frame extends JFrame {
     private class Panel extends JPanel{
 
         private City[] citiesList;
-        private Queue<Edge> edgesList;
+        private Integer[] edgesList;
 
-        public Panel(City[] citiesList, Queue<Edge> edgesList){
+        public Panel(City[] citiesList, Integer[] edgesList){
             setBackground(Color.white);
             this.citiesList = citiesList;
             this.edgesList = edgesList;
@@ -38,11 +38,14 @@ public class Frame extends JFrame {
 
             System.out.println("Number of cities: " + citiesList.length);
 
-            Integer numOfEdges = edgesList.size();
-            while(!edgesList.isEmpty()){    //draw edges which are in the edgesList
-                Edge tmp = edgesList.poll();
-                System.out.println("From City " + tmp.tag1 + " to City " + tmp.tag2);
-                g.drawLine(tmp.x1/10+60, tmp.y1/10+30, tmp.x2/10+60, tmp.y2/10+30);
+            Integer numOfEdges = edgesList.length;
+            for(int i=0;i<edgesList.length;i++){    //draw edges which are in the edgesList
+                City tmp1 = citiesList[edgesList[i]-1];
+                City tmp2;
+                if(i == edgesList.length-1) tmp2 = citiesList[edgesList[0]-1];
+                else tmp2 = citiesList[edgesList[i+1]-1];
+                System.out.println("From City " + tmp1.tag + " to City " + tmp2.tag);
+                g.drawLine(tmp1.x/10+60, tmp1.y/10+30, tmp2.x/10+60, tmp2.y/10+30);
 
             }
             System.out.println("Number of edges: " + numOfEdges);

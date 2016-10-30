@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 /**
  * Created by Xuhao Chen on 2016/10/26.
@@ -11,7 +12,7 @@ public class TSP {
     public final static String fileName = "/Users/START_Eric/myCode/IntellijCode/TSPGeneticAlgorithm/TSP/TSP/src/att48.tsp";
     public Integer numOfCities = 0;
     public static City[] citiesList;
-    public static Queue<Edge> edgesList;
+    public static Integer[] edgesList;
     public EdgeWeightType edgeWeightType;
 
 
@@ -91,6 +92,7 @@ public class TSP {
                 }
                 position++;
                 numOfCities = Integer.parseInt(aLine.substring(position,aLine.length()));   //numOfCities set
+                edgesList = new Integer[numOfCities];
             }
             else if(aLine.contains("EDGE_WEIGHT_TYPE")){  //pair EDGE_WEIGHT_TYPE
                 int position = aLine.length()-1;
@@ -166,22 +168,27 @@ public class TSP {
         @Override
         public void run() {
             synchronized (lock){
-                for(int i=0;i<citiesList.length;i++){
-                    City tmp1 = citiesList[i];
-                    City tmp2;
-                    if(i==citiesList.length-1) tmp2 = citiesList[0];
-                    else tmp2 = citiesList[i+1];
+                /*********** Random Generate a edgeList(TEST ONLY) ***********/
+                int numOfEdgeSaved=0;
+                Random rand = new Random();
+                boolean[] set = new boolean[numOfCities];
+                for(int i=0;i<set.length;i++)  set[i] = false;
 
-                    edgesList.offer(new Edge(tmp1.tag, tmp1.x, tmp1.y, tmp2.tag, tmp2.x, tmp2.y));
+                while(numOfEdgeSaved != numOfCities){
+                    Integer i = rand.nextInt(numOfCities);
+                    if(!set[i]){
+                        edgesList[numOfEdgeSaved] = i + 1;
+                        set[i]=true;
+                        numOfEdgeSaved++;
+                    }
                 }
+                /***********************************************************/
             }
         }
     }
 
 
     public TSP(){
-
-        edgesList = new LinkedList<>();
 
         readerThread = new Thread(new FileReaderRunnable());
         if(getOutput) outputThread = new Thread(new OutputRunnable());
