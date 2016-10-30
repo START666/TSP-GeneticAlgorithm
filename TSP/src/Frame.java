@@ -37,8 +37,9 @@ public class Frame extends JFrame {
             }
 
             System.out.println("Number of cities: " + citiesList.length);
+
             Integer numOfEdges = edgesList.size();
-            while(!edgesList.isEmpty()){
+            while(!edgesList.isEmpty()){    //draw edges which are in the edgesList
                 Edge tmp = edgesList.poll();
                 System.out.println("From City " + tmp.tag1 + " to City " + tmp.tag2);
                 g.drawLine(tmp.x1/10+60, tmp.y1/10+30, tmp.x2/10+60, tmp.y2/10+30);
