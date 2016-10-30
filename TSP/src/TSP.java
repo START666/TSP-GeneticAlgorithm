@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,13 +11,14 @@ import java.util.Random;
  */
 public class TSP {
 
-    public final static String fileName = "/Users/START_Eric/myCode/IntellijCode/TSPGeneticAlgorithm/TSP/TSP/src/att48.tsp";
+    public static String fileName ;
     public Integer numOfCities = 0;
     public static City[] citiesList;
     public static Integer[] edgesList;
     public EdgeWeightType edgeWeightType;
 
 
+    private boolean debugFileChooser = false;
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
     private Thread readerThread;
@@ -117,6 +120,19 @@ public class TSP {
         public void run() {
             synchronized (lock) {
                 FileProcessor fp = new FileProcessor();
+                if(!debugFileChooser){
+                    JFileChooser fileChooser = new JFileChooser();
+                    try{
+                        fileChooser.showOpenDialog(null);
+                    }catch (HeadlessException hE){
+                        System.err.println("Open File Dialog Error");
+                        hE.printStackTrace();
+                    }
+                    File tmp = fileChooser.getSelectedFile();
+
+                    fileName = tmp.getAbsolutePath();
+                }else fileName = "/Users/START_Eric/myCode/IntellijCode/TSPGeneticAlgorithm/TSP/TSP/src/att48.tsp";
+                System.out.println("Open file: " + fileName);
 
                 fp.readFile(fileName);
 
