@@ -2,6 +2,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -17,6 +18,9 @@ public class TSP {
 
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
+    private Thread readerThread;
+    private Thread outputThread;
+    private Object lock = new Object();
 
     public enum EdgeWeightType{
         ATT,
@@ -102,16 +106,56 @@ public class TSP {
         }
     }
 
+    private class FileReaderRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock) {
+                FileProcessor fp = new FileProcessor();
+
+                fp.readFile(fileName);
+
+                buildCityList();
+                lock.notify();
+
+                System.out.println("Total "+numOfCities+" number of cities have been saved.");
+
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("Thread done.");
+            }
+
+        }
+    }
+
+    private class OutputRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock) {
+                for (int i = 0; i < citiesList.length; i++) {
+                    City tmp = citiesList[i];
+                    System.out.println("City " + tmp.tag + " :(" + tmp.x + ", " + tmp.y + ")");
+                }
+                lock.notify();
+            }
+
+        }
+    }
 
     public TSP(){
 
-        FileProcessor fp = new FileProcessor();
+        FileReaderRunnable fileReaderRunnable = new FileReaderRunnable();
+        OutputRunnable outputRunnable = new OutputRunnable();
+        readerThread = new Thread(fileReaderRunnable);
+        outputThread = new Thread(outputRunnable);
 
-        fp.readFile(fileName);
-
-        buildCityList();
-
-
+        readerThread.start();
+        outputThread.start();
 
 //        for(int i=0;i<file.size();i++){
 //            System.out.println(file.get(i));
@@ -147,7 +191,7 @@ public class TSP {
             yCoord = Integer.parseInt(line.substring(second+1,line.length()));
 
             citiesList[tag-1] = new City(tag,xCoord,yCoord);
-            System.out.println("City "+tag+" has been saved" );
+//            System.out.println("City "+tag+" has been saved" );
 
         }
     }
