@@ -1,8 +1,6 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -13,6 +11,7 @@ public class TSP {
     public final static String fileName = "/Users/START_Eric/myCode/IntellijCode/TSPGeneticAlgorithm/TSP/TSP/src/att48.tsp";
     public Integer numOfCities = 0;
     public static City[] citiesList;
+    public static Queue<Edge> edgesList;
     public EdgeWeightType edgeWeightType;
 
 
@@ -20,7 +19,11 @@ public class TSP {
     private ArrayList<String> file = new ArrayList<>();
     private Thread readerThread;
     private Thread outputThread;
+    private Thread displayThread;
+    private Thread calculateThread;
     private Object lock = new Object();
+
+    private boolean getOutput = false;
 
     public enum EdgeWeightType{
         ATT,
@@ -137,25 +140,59 @@ public class TSP {
         @Override
         public void run() {
             synchronized (lock) {
+                lock.notify();
                 for (int i = 0; i < citiesList.length; i++) {
                     City tmp = citiesList[i];
                     System.out.println("City " + tmp.tag + " :(" + tmp.x + ", " + tmp.y + ")");
                 }
-                lock.notify();
+
             }
 
         }
     }
 
+    private class DisplayRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock){
+                Frame frame = new Frame(900,600,citiesList,edgesList);
+            }
+        }
+    }
+
+    private class CalculateRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            synchronized (lock){
+                for(int i=0;i<citiesList.length;i++){
+                    City tmp1 = citiesList[i];
+                    City tmp2;
+                    if(i==citiesList.length-1) tmp2 = citiesList[0];
+                    else tmp2 = citiesList[i+1];
+
+                    edgesList.offer(new Edge(tmp1.tag, tmp1.x, tmp1.y, tmp2.tag, tmp2.x, tmp2.y));
+                }
+            }
+        }
+    }
+
+
     public TSP(){
 
-        FileReaderRunnable fileReaderRunnable = new FileReaderRunnable();
-        OutputRunnable outputRunnable = new OutputRunnable();
-        readerThread = new Thread(fileReaderRunnable);
-        outputThread = new Thread(outputRunnable);
+        edgesList = new LinkedList<>();
+
+        readerThread = new Thread(new FileReaderRunnable());
+        if(getOutput) outputThread = new Thread(new OutputRunnable());
+        displayThread = new Thread(new DisplayRunnable());
+        calculateThread = new Thread(new CalculateRunnable());
 
         readerThread.start();
-        outputThread.start();
+        if(getOutput) outputThread.start();
+        calculateThread.start();
+        displayThread.start();
+
 
 //        for(int i=0;i<file.size();i++){
 //            System.out.println(file.get(i));
