@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP.class" afterPath="$PROJECT_DIR$/TSP/test/TSP.class" />
+    <list default="true" id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/src/TSP.java" afterPath="$PROJECT_DIR$/TSP/src/TSP.java" />
     </list>
     <ignored path="TSP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +26,7 @@
       <file leaf-file-name="TSP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1890">
+            <state relative-caret-position="-2172">
               <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -86,7 +82,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="singleThread" />
+        <entry key="$PROJECT_DIR$" value="origin/GACalatulation/createFirstGeneration" />
       </map>
     </option>
   </component>
@@ -684,7 +680,7 @@
       <option name="presentableId" value="Default" />
       <updated>1477876589122</updated>
       <workItem from="1477876593845" duration="1361000" />
-      <workItem from="1477879128506" duration="2380000" />
+      <workItem from="1477879128506" duration="2726000" />
     </task>
     <task id="LOCAL-00006" summary="comment randomGenerate code.">
       <created>1477879807578</created>
@@ -700,11 +696,18 @@
       <option name="project" value="LOCAL" />
       <updated>1477880267216</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Separate the randomGeneration algorithm, will be used in generating the first generation">
+      <created>1477881947268</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1477881947268</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17925000" />
+    <option name="totallyTimeSpent" value="18271000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -782,7 +785,8 @@
     <MESSAGE value="Now user can use JFileChooser to choose the file.&#10;debugFileChooser: &#10;    true -- use default file path while debugging&#10;    false -- use JFileChooser to choose the file" />
     <MESSAGE value="comment randomGenerate code." />
     <MESSAGE value="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!" />
+    <MESSAGE value="Separate the randomGeneration algorithm, will be used in generating the first generation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separate the randomGeneration algorithm, will be used in generating the first generation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -928,7 +932,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1890">
+        <state relative-caret-position="-2172">
           <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
