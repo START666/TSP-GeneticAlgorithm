@@ -12,12 +12,14 @@ public class TSP {
     public Integer numOfCities = 0;
     public static City[] citiesList;
     public static Integer[] edgesList;
+    public static Integer[][] distanceSquareTable;
     public EdgeWeightType edgeWeightType;
 
-    public Integer numOfPopulation = 100;
+    public Integer numOfPopulation = 5000;
     public HashMap<Integer, Integer[]> populationPool;
 
-    private boolean debugFileChooser = true;
+    public static boolean debugFileChooser = true;
+    public static boolean debugOutput = false;
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
     private Random random;
@@ -107,6 +109,7 @@ public class TSP {
                 cityStartLine = lineNumber+1;
             }
         }
+
     }
 
     private void readFile(){
@@ -128,6 +131,7 @@ public class TSP {
         fp.readFile(fileName);
 
         buildCityList();
+        calculateDistanceSquareTable();
 
         System.out.println("Total "+numOfCities+" number of cities have been saved.");
 
@@ -141,7 +145,9 @@ public class TSP {
     }
 
     private void visualization(){
-        Frame frame = new Frame(900,600,citiesList,edgesList);
+        if(citiesList != null && edgesList != null){
+            Frame frame = new Frame(900,600,citiesList,edgesList);
+        }
     }
 
     private void calculate(){
@@ -169,27 +175,66 @@ public class TSP {
     }
 
     private void createPopulationPool(){
-        // TODO: 2016/10/30 random generate the first generation
         populationPool = new HashMap<>();
 
         for(int i=0;i<numOfPopulation;i++){
             populationPool.put(i,randomGenerationAPopulation());
         }
+        System.out.println("Generate the first generation successfully.");
 
-        int getLocation = random.nextInt(numOfPopulation+1);
-        edgesList = populationPool.get(getLocation);
-
-        System.out.println("Get the population of " + getLocation + "th. ");
-
+//        int getLocation = random.nextInt(numOfPopulation+1);
+//        edgesList = populationPool.get(getLocation);
+//
+//        System.out.println("Get the population of " + getLocation);
+    }
+    
+    private void crossover(HashMap<Integer, Integer[]> populationPool, double rate){
+        // TODO: 2016/10/31 let crossover in the populationPool with rate 
+    }
+    
+    private Integer[] mutation(Integer[] population){
+        // TODO: 2016/10/31 mutation one population
+        return null;
+    }
+    
+    private Integer getTotalDistance(Integer[] population){
+        // TODO: 2016/10/31 return the value of total distance 
+        return 0;
     }
 
 
-    public TSP(){
+    public TSP(){   // Main constructor
         readFile();
-        outputCities();
+        if(debugOutput) outputCities();
         calculate();
         visualization();
 
+    }
+
+    public static String integerArrayToString(Integer[] array){
+        if(array==null) return "";
+        String result = "[ ";
+        for(int i=0;i<array.length;i++){
+            if(array[i] != null) result += array[i].toString();
+            else result += "null";
+            if(i != array.length-1) result += ", ";
+            else result += " ]";
+        }
+        return result;
+    }
+
+    public static int calculateDistanceSquare(int x1, int y1, int x2, int y2){   //avoid calculating sqrt saves a huge amount of time
+        if(x1 == x2){
+            if(y1 == y2)
+                return 0;
+            else
+                return Math.abs(y1 - y2) * Math.abs(y1 - y2);
+        }else{
+            if(y1 == y2)
+                return Math.abs(x1 - x2) * Math.abs(x1 - x2);
+            else
+                return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+        }
     }
 
     private void buildCityList(){
@@ -219,6 +264,27 @@ public class TSP {
 //            System.out.println("City "+tag+" has been saved" );
 
         }
+    }
+
+    private void calculateDistanceSquareTable(){
+        distanceSquareTable = new Integer[numOfCities][numOfCities];
+
+        for(int i=0;i<numOfCities;i++){
+            for(int j=0;j<i;j++){
+                if(i==j) distanceSquareTable[i][j]=0;
+                else{
+                    City tmp1 = citiesList[i];
+                    City tmp2 = citiesList[j];
+                    int distance =  calculateDistanceSquare(tmp1.x,tmp1.y,tmp2.x,tmp2.y);
+
+                    distanceSquareTable[i][j] = distance;
+                    distanceSquareTable[j][i] = distance;
+
+                }
+
+            }
+        }
+
     }
 
     public static void main(String args[]){new TSP();}
