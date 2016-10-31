@@ -20,6 +20,7 @@ public class TSP {
     private boolean debugFileChooser = true;
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
+    private Random random;
 
     private boolean getOutput = false;
 
@@ -144,23 +145,32 @@ public class TSP {
     }
 
     private void calculate(){
+        edgesList = randomGenerationAPopulation();
+
+    }
+
+    private Integer[] randomGenerationAPopulation(){
         int numOfEdgeSaved=0;
-        Random rand = new Random();
+        Integer[] population = new Integer[numOfCities];
+        random = new Random();
         boolean[] set = new boolean[numOfCities];
         for(int i=0;i<set.length;i++)  set[i] = false;
 
         while(numOfEdgeSaved != numOfCities){
-            Integer i = rand.nextInt(numOfCities);
+            Integer i = random.nextInt(numOfCities);
             if(!set[i]){
-                edgesList[numOfEdgeSaved] = i + 1;
+                population[numOfEdgeSaved] = i + 1;
                 set[i]=true;
                 numOfEdgeSaved++;
             }
         }
+        return population;
     }
+
     private void createPopulationPool(){
         // TODO: 2016/10/30 random generate the first generation
         populationPool = new HashMap<>();
+
 
     }
 

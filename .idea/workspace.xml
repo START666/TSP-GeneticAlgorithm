@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$CalculateRunnable.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$DisplayRunnable.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$FileReaderRunnable.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$OutputRunnable.class" afterPath="" />
+    <list default="true" id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP.class" afterPath="$PROJECT_DIR$/TSP/test/TSP.class" />
@@ -34,12 +30,12 @@
       <file leaf-file-name="TSP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2265">
-              <caret line="171" column="24" selection-start-line="171" selection-start-column="24" selection-end-line="171" selection-end-column="24" />
+            <state relative-caret-position="-1890">
+              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4658#4659#0" expanded="true" />
-                <element signature="e#4727#4728#0" expanded="true" />
+                <element signature="e#4685#4686#0" expanded="true" />
+                <element signature="e#4754#4755#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,7 +86,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="GACalatulation" />
+        <entry key="$PROJECT_DIR$" value="singleThread" />
       </map>
     </option>
   </component>
@@ -688,7 +684,7 @@
       <option name="presentableId" value="Default" />
       <updated>1477876589122</updated>
       <workItem from="1477876593845" duration="1361000" />
-      <workItem from="1477879128506" duration="1075000" />
+      <workItem from="1477879128506" duration="2380000" />
     </task>
     <task id="LOCAL-00006" summary="comment randomGenerate code.">
       <created>1477879807578</created>
@@ -697,11 +693,18 @@
       <option name="project" value="LOCAL" />
       <updated>1477879807578</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!">
+      <created>1477880267216</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1477880267216</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16620000" />
+    <option name="totallyTimeSpent" value="17925000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -778,7 +781,8 @@
     <MESSAGE value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;Changes:&#10;    1. Edge Class removed, Integer[] edgesList instead.&#10;    2. edgesList contains the tags of cities in the way.&#10;    3. CalculateThread contains a random-generate-algorithm to create a random edgeList." />
     <MESSAGE value="Now user can use JFileChooser to choose the file.&#10;debugFileChooser: &#10;    true -- use default file path while debugging&#10;    false -- use JFileChooser to choose the file" />
     <MESSAGE value="comment randomGenerate code." />
-    <option name="LAST_COMMIT_MESSAGE" value="comment randomGenerate code." />
+    <MESSAGE value="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -797,8 +801,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4658#4659#0" expanded="true" />
-            <element signature="e#4727#4728#0" expanded="true" />
+            <element signature="e#4685#4686#0" expanded="true" />
+            <element signature="e#4754#4755#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -835,8 +839,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4658#4659#0" expanded="true" />
-            <element signature="e#4727#4728#0" expanded="true" />
+            <element signature="e#4685#4686#0" expanded="true" />
+            <element signature="e#4754#4755#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -924,12 +928,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2265">
-          <caret line="171" column="24" selection-start-line="171" selection-start-column="24" selection-end-line="171" selection-end-column="24" />
+        <state relative-caret-position="-1890">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4658#4659#0" expanded="true" />
-            <element signature="e#4727#4728#0" expanded="true" />
+            <element signature="e#4685#4686#0" expanded="true" />
+            <element signature="e#4754#4755#0" expanded="true" />
           </folding>
         </state>
       </provider>
