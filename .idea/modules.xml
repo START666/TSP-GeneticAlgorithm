@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TSP/TSP.iml" filepath="$PROJECT_DIR$/TSP/TSP.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TSPGA/TSPGA.iml" filepath="$PROJECT_DIR$/TSPGA/TSPGA.iml" />
     </modules>
   </component>
 </project>

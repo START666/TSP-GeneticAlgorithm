@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by Xuhao Chen on 2016/10/26.
@@ -17,15 +14,13 @@ public class TSP {
     public static Integer[] edgesList;
     public EdgeWeightType edgeWeightType;
 
+    public Integer numOfPopulation = 100;
+    public HashMap<Integer, Integer[]> populationPool;
 
-    private boolean debugFileChooser = false;
+    private boolean debugFileChooser = true;
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
-    private Thread readerThread;
-    private Thread outputThread;
-    private Thread displayThread;
-    private Thread calculateThread;
-    private Object lock = new Object();
+    private Random random;
 
     private boolean getOutput = false;
 
@@ -114,116 +109,77 @@ public class TSP {
         }
     }
 
-    private class FileReaderRunnable implements Runnable{
-
-        @Override
-        public void run() {
-            synchronized (lock) {
-                FileProcessor fp = new FileProcessor();
-                if(!debugFileChooser){
-                    JFileChooser fileChooser = new JFileChooser();
-                    try{
-                        fileChooser.showOpenDialog(null);
-                    }catch (HeadlessException hE){
-                        System.err.println("Open File Dialog Error");
-                        hE.printStackTrace();
-                    }
-                    File tmp = fileChooser.getSelectedFile();
-
-                    fileName = tmp.getAbsolutePath();
-                }else fileName = "/Users/START_Eric/myCode/IntellijCode/TSPGeneticAlgorithm/TSP/TSP/src/att48.tsp";
-                System.out.println("Open file: " + fileName);
-
-                fp.readFile(fileName);
-
-                buildCityList();
-                lock.notify();
-
-                System.out.println("Total "+numOfCities+" number of cities have been saved.");
-
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println("Thread done.");
+    private void readFile(){
+        FileProcessor fp = new FileProcessor();
+        if(!debugFileChooser){
+            JFileChooser fileChooser = new JFileChooser();
+            try{
+                fileChooser.showOpenDialog(null);
+            }catch (HeadlessException hE){
+                System.err.println("Open File Dialog Error");
+                hE.printStackTrace();
             }
+            File tmp = fileChooser.getSelectedFile();
 
+            fileName = tmp.getAbsolutePath();
+        }else fileName = "/Users/START_Eric/myCode/IntellijCode/TSPGeneticAlgorithm/TSP/TSP/src/att48.tsp";
+        System.out.println("Open file: " + fileName);
+
+        fp.readFile(fileName);
+
+        buildCityList();
+
+        System.out.println("Total "+numOfCities+" number of cities have been saved.");
+
+    }
+
+    private void outputCities(){
+        for (int i = 0; i < citiesList.length; i++) {
+            City tmp = citiesList[i];
+            System.out.println("City " + tmp.tag + " :(" + tmp.x + ", " + tmp.y + ")");
         }
     }
 
-    private class OutputRunnable implements Runnable{
-
-        @Override
-        public void run() {
-            synchronized (lock) {
-                lock.notify();
-                for (int i = 0; i < citiesList.length; i++) {
-                    City tmp = citiesList[i];
-                    System.out.println("City " + tmp.tag + " :(" + tmp.x + ", " + tmp.y + ")");
-                }
-
-            }
-
-        }
+    private void visualization(){
+        Frame frame = new Frame(900,600,citiesList,edgesList);
     }
 
-    private class DisplayRunnable implements Runnable{
+    private void calculate(){
+        edgesList = randomGenerationAPopulation();
 
-        @Override
-        public void run() {
-            synchronized (lock){
-                Frame frame = new Frame(900,600,citiesList,edgesList);
-            }
-        }
     }
 
-    private class CalculateRunnable implements Runnable{
+    private Integer[] randomGenerationAPopulation(){
+        int numOfEdgeSaved=0;
+        Integer[] population = new Integer[numOfCities];
+        random = new Random();
+        boolean[] set = new boolean[numOfCities];
+        for(int i=0;i<set.length;i++)  set[i] = false;
 
-        @Override
-        public void run() {
-            synchronized (lock){
-                /*********** Random Generate a edgeList(TEST ONLY) ***********/
-                int numOfEdgeSaved=0;
-                Random rand = new Random();
-                boolean[] set = new boolean[numOfCities];
-                for(int i=0;i<set.length;i++)  set[i] = false;
-
-                while(numOfEdgeSaved != numOfCities){
-                    Integer i = rand.nextInt(numOfCities);
-                    if(!set[i]){
-                        edgesList[numOfEdgeSaved] = i + 1;
-                        set[i]=true;
-                        numOfEdgeSaved++;
-                    }
-                }
-                /***********************************************************/
+        while(numOfEdgeSaved != numOfCities){
+            Integer i = random.nextInt(numOfCities);
+            if(!set[i]){
+                population[numOfEdgeSaved] = i + 1;
+                set[i]=true;
+                numOfEdgeSaved++;
             }
         }
+        return population;
+    }
+
+    private void createPopulationPool(){
+        // TODO: 2016/10/30 random generate the first generation
+        populationPool = new HashMap<>();
+
+
     }
 
 
     public TSP(){
-
-        readerThread = new Thread(new FileReaderRunnable());
-        if(getOutput) outputThread = new Thread(new OutputRunnable());
-        displayThread = new Thread(new DisplayRunnable());
-        calculateThread = new Thread(new CalculateRunnable());
-
-        readerThread.start();
-        if(getOutput) outputThread.start();
-        calculateThread.start();
-        displayThread.start();
-
-
-//        for(int i=0;i<file.size();i++){
-//            System.out.println(file.get(i));
-//        }
-//
-//        System.out.println("numOfCities = " + numOfCities);
-//        System.out.println("edgeWeightType = " + edgeWeightType.toString());
-
+        readFile();
+        outputCities();
+        calculate();
+        visualization();
 
     }
 
