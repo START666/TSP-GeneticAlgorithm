@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by Xuhao Chen on 2016/10/26.
@@ -17,8 +14,10 @@ public class TSP {
     public static Integer[] edgesList;
     public EdgeWeightType edgeWeightType;
 
+    public Integer numOfPopulation = 100;
+    public HashMap<Integer, Integer[]> populationPool;
 
-    private boolean debugFileChooser = false;
+    private boolean debugFileChooser = true;
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
     private Thread readerThread;
@@ -184,6 +183,7 @@ public class TSP {
         @Override
         public void run() {
             synchronized (lock){
+                // TODO: 2016/10/30 replace the random algorithm with GA
                 /*********** Random Generate a edgeList(TEST ONLY) ***********/
                 int numOfEdgeSaved=0;
                 Random rand = new Random();
@@ -198,9 +198,38 @@ public class TSP {
                         numOfEdgeSaved++;
                     }
                 }
+//                edgesList = randomGeneratePopulation();
                 /***********************************************************/
             }
         }
+    }
+
+//    private Integer[] randomGeneratePopulation(){
+//
+//        synchronized (lock){
+//        Integer[] population = new Integer[numOfCities];
+//
+//        int numOfEdgeSaved=0;
+//        Random rand = new Random();
+//        boolean[] set = new boolean[numOfCities];
+//        for(int i=0;i<set.length;i++)  set[i] = false;
+//
+//        while(numOfEdgeSaved != numOfCities){
+//            Integer i = rand.nextInt(numOfCities);
+//            if(!set[i]){
+//                population[numOfEdgeSaved] = i + 1;
+//                set[i]=true;
+//                numOfEdgeSaved++;
+//            }
+//        }
+//        return population;
+//        }
+//    }
+
+    private void createPopulationPool(){
+        // TODO: 2016/10/30 random generate the first generation
+        populationPool = new HashMap<>();
+
     }
 
 
