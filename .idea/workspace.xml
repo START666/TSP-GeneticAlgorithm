@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$CalculateRunnable.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$CalculateRunnable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$DisplayRunnable.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$DisplayRunnable.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$CalculateRunnable.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$DisplayRunnable.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$FileReaderRunnable.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TSP/test/TSP$OutputRunnable.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$FileReaderRunnable.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$FileReaderRunnable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$OutputRunnable.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$OutputRunnable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP.class" afterPath="$PROJECT_DIR$/TSP/test/TSP.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/src/TSP.java" afterPath="$PROJECT_DIR$/TSP/src/TSP.java" />
     </list>
@@ -35,10 +34,12 @@
       <file leaf-file-name="TSP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="200" column="17" selection-start-line="200" selection-start-column="17" selection-end-line="200" selection-end-column="17" />
+            <state relative-caret-position="2265">
+              <caret line="171" column="24" selection-start-line="171" selection-start-column="24" selection-end-line="171" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4658#4659#0" expanded="true" />
+                <element signature="e#4727#4728#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -89,7 +90,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="GACalatulation" />
       </map>
     </option>
   </component>
@@ -197,6 +198,7 @@
     <property name="SearchEverywhereHistoryKey" value="plugin&#9;PSI&#9;JAVA://com.sun.source.util.Plugin" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="GO_FMT" value="false" />
   </component>
   <component name="RunManager" selected="Application.TSP">
     <configuration default="false" name="TSP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -686,13 +688,20 @@
       <option name="presentableId" value="Default" />
       <updated>1477876589122</updated>
       <workItem from="1477876593845" duration="1361000" />
-      <workItem from="1477879128506" duration="642000" />
+      <workItem from="1477879128506" duration="1075000" />
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="comment randomGenerate code.">
+      <created>1477879807578</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1477879807578</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16187000" />
+    <option name="totallyTimeSpent" value="16620000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -768,7 +777,8 @@
     <MESSAGE value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;New features:&#10;    1. New class Frame added.&#10;    2. New class Edge added.&#10;    3. 2 More Threads added, totally 4 threads" />
     <MESSAGE value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;Changes:&#10;    1. Edge Class removed, Integer[] edgesList instead.&#10;    2. edgesList contains the tags of cities in the way.&#10;    3. CalculateThread contains a random-generate-algorithm to create a random edgeList." />
     <MESSAGE value="Now user can use JFileChooser to choose the file.&#10;debugFileChooser: &#10;    true -- use default file path while debugging&#10;    false -- use JFileChooser to choose the file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now user can use JFileChooser to choose the file.&#10;debugFileChooser: &#10;    true -- use default file path while debugging&#10;    false -- use JFileChooser to choose the file" />
+    <MESSAGE value="comment randomGenerate code." />
+    <option name="LAST_COMMIT_MESSAGE" value="comment randomGenerate code." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -787,6 +797,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4658#4659#0" expanded="true" />
+            <element signature="e#4727#4728#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -823,6 +835,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4658#4659#0" expanded="true" />
+            <element signature="e#4727#4728#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -910,10 +924,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="200" column="17" selection-start-line="200" selection-start-column="17" selection-end-line="200" selection-end-column="17" />
+        <state relative-caret-position="2265">
+          <caret line="171" column="24" selection-start-line="171" selection-start-column="24" selection-end-line="171" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4658#4659#0" expanded="true" />
+            <element signature="e#4727#4728#0" expanded="true" />
           </folding>
         </state>
       </provider>
