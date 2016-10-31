@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP.class" afterPath="$PROJECT_DIR$/TSP/test/TSP.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/src/TSP.java" afterPath="$PROJECT_DIR$/TSP/src/TSP.java" />
     </list>
     <ignored path="TSP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +26,7 @@
       <file leaf-file-name="TSP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
+            <state relative-caret-position="-142">
               <caret line="181" column="72" selection-start-line="181" selection-start-column="72" selection-end-line="181" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -188,6 +186,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="GO_FMT" value="false" />
   </component>
   <component name="RunManager" selected="Application.TSP">
     <configuration default="false" name="TSP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -686,13 +685,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1477882560591</updated>
-      <workItem from="1477882561996" duration="807000" />
+      <workItem from="1477882561996" duration="1076000" />
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="First step of  GA done.&#10;    The first generation of population has been created, and they are stored into HashMap populationPool.&#10;        The first generation is random generated.">
+      <created>1477884824057</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1477884824057</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14494000" />
+    <option name="totallyTimeSpent" value="14763000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -758,7 +764,8 @@
     <MESSAGE value="2 Threads established:&#10;    1. FileReaderRunnable Thread: read file and save data into memory&#10;    2. OutputRunnable Thread: print all cities' locations to console" />
     <MESSAGE value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;New features:&#10;    1. New class Frame added.&#10;    2. New class Edge added.&#10;    3. 2 More Threads added, totally 4 threads" />
     <MESSAGE value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;Changes:&#10;    1. Edge Class removed, Integer[] edgesList instead.&#10;    2. edgesList contains the tags of cities in the way.&#10;    3. CalculateThread contains a random-generate-algorithm to create a random edgeList." />
-    <option name="LAST_COMMIT_MESSAGE" value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;Changes:&#10;    1. Edge Class removed, Integer[] edgesList instead.&#10;    2. edgesList contains the tags of cities in the way.&#10;    3. CalculateThread contains a random-generate-algorithm to create a random edgeList." />
+    <MESSAGE value="First step of  GA done.&#10;    The first generation of population has been created, and they are stored into HashMap populationPool.&#10;        The first generation is random generated." />
+    <option name="LAST_COMMIT_MESSAGE" value="First step of  GA done.&#10;    The first generation of population has been created, and they are stored into HashMap populationPool.&#10;        The first generation is random generated." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -861,7 +868,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
+        <state relative-caret-position="-142">
           <caret line="181" column="72" selection-start-line="181" selection-start-column="72" selection-end-line="181" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
