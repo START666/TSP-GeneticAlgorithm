@@ -145,8 +145,9 @@ public class TSP {
     }
 
     private void calculate(){
-        edgesList = randomGenerationAPopulation();
+//        edgesList = randomGenerationAPopulation();
 
+        createPopulationPool();
     }
 
     private Integer[] randomGenerationAPopulation(){
@@ -171,6 +172,14 @@ public class TSP {
         // TODO: 2016/10/30 random generate the first generation
         populationPool = new HashMap<>();
 
+        for(int i=0;i<numOfPopulation;i++){
+            populationPool.put(i,randomGenerationAPopulation());
+        }
+
+        int getLocation = random.nextInt(numOfPopulation+1);
+        edgesList = populationPool.get(getLocation);
+
+        System.out.println("Get the population of " + getLocation + "th. ");
 
     }
 
