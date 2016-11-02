@@ -12,10 +12,10 @@ public class TSP {
     public Integer numOfCities = 0;
     public static City[] citiesList;
     public static Integer[] edgesList;
-    public static Integer[][] distanceSquareTable;
+    public static Integer[][] distanceTable;
     public EdgeWeightType edgeWeightType;
 
-    public Integer numOfPopulation = 5000;
+    public Integer populationSize = 5000;
     public HashMap<Integer, Integer[]> populationPool;
 
     public static boolean debugFileChooser = true;
@@ -131,7 +131,7 @@ public class TSP {
         fp.readFile(fileName);
 
         buildCityList();
-        calculateDistanceSquareTable();
+        calculateDistanceTable();
 
         System.out.println("Total "+numOfCities+" number of cities have been saved.");
 
@@ -177,29 +177,132 @@ public class TSP {
     private void createPopulationPool(){
         populationPool = new HashMap<>();
 
-        for(int i=0;i<numOfPopulation;i++){
+        for(int i = 0; i< populationSize; i++){
             populationPool.put(i,randomGenerationAPopulation());
         }
         System.out.println("Generate the first generation successfully.");
 
-//        int getLocation = random.nextInt(numOfPopulation+1);
-//        edgesList = populationPool.get(getLocation);
-//
-//        System.out.println("Get the population of " + getLocation);
+        int getLocation = random.nextInt(populationSize +1);
+        edgesList = populationPool.get(getLocation);
+
+        System.out.println("Get the population of " + getLocation);
+        System.out.println("Total distance = " + getTotalDistance(edgesList));
+    }
+
+    private boolean existsInArray(Integer[] arr, Integer i){
+
+        boolean isNull = (i==null);
+
+        for(Integer m : arr){
+            if(isNull){
+                if (m==null) return true;
+            }else{
+                if(m==null) continue;
+                if(m.equals(i)) return true;
+            }
+        }
+
+        return false;
+
     }
     
-    private void crossover(HashMap<Integer, Integer[]> populationPool, double rate){
-        // TODO: 2016/10/31 let crossover in the populationPool with rate 
+    private void crossover(HashMap<Integer, Integer[]> populationPool, double rate){  //crossover and elitism
+
+        PriorityQueue<Integer[]> elitismQueue = new PriorityQueue<>(numOfCities*2,new ElitismComparator());
+
+        for(int i=0;i<populationPool.size()/2;i++){
+            if(Math.random() <= rate){
+
+                Random maskGenerator = new Random();
+
+                Integer population1 = random.nextInt(populationPool.size());
+                Integer population2 = random.nextInt(populationPool.size());
+
+                while(population1.equals(population2)) population2 = random.nextInt(populationPool.size());
+
+                Integer[] parent1 = populationPool.get(population1);
+                Integer[] parent2 = populationPool.get(population2);
+
+                Integer[] child1 = new Integer[numOfCities];
+                Integer[] child2 = new Integer[numOfCities];
+
+                for(int c=0;c<numOfCities;c++){   //copy to child if mask is true
+                    if(maskGenerator.nextBoolean()){  //if mask is true, copy from parent
+                        child1[c] = parent1[c];
+                        child2[c] = parent2[c];
+                    }
+                }
+
+
+                int iterator1 = 0;
+                int iterator2 = 0;
+                for(int c=0;c<numOfCities;c++){   //copy from other parent if not exists
+                    if(child1[c]==null){   //if child1[c] is null then child2[c] must be null
+
+                        while(existsInArray(child1,parent2[iterator2])){  //if exists in child1, move to next
+                            if(iterator2 < numOfCities) iterator2++;
+                            else iterator2 = 0;
+                        }
+
+                        while(existsInArray(child2,parent1[iterator1])){  //if exists in child2, move to next
+                            if(iterator1 < numOfCities) iterator1++;
+                            else iterator1 = 0;
+                        }
+
+                        child1[c] = parent2[iterator2];
+                        child2[c] = parent1[iterator1];
+
+                        iterator1++;
+                        iterator2++;
+
+                    }
+                }
+
+                elitismQueue.offer(child1);
+                elitismQueue.offer(child2);
+            }
+        }
+        for(int i=0;i<numOfCities;i++)  //put all parents to elitismQueue
+            elitismQueue.offer(populationPool.get(i));
+
+        populationPool = new HashMap<>();
+
+        for(int i=0;i<numOfCities;i++){   //use the best half of the elitismQueue to create the new populationPool
+            populationPool.put(i,elitismQueue.poll());
+        }
+
     }
     
-    private Integer[] mutation(Integer[] population){
-        // TODO: 2016/10/31 mutation one population
-        return null;
+    private boolean mutation(Integer[] population){
+        if(population == null) return false;
+
+        Integer location1 = random.nextInt(population.length);
+        Integer location2 = random.nextInt(population.length);
+
+        while(location1.equals(location2)) location2 = random.nextInt(population.length);
+
+        //swap 2 cities
+        population[location1] += population[location2];
+        population[location2] = population[location1] - population[location2];
+        population[location1] = population[location1] - population[location2];
+
+        return true;
     }
     
-    private Integer getTotalDistance(Integer[] population){
-        // TODO: 2016/10/31 return the value of total distance 
-        return 0;
+    public static Integer getTotalDistance(Integer[] population){
+        Integer distance = 0;
+
+        for(int i=0;i<population.length;i++){
+            int city1 = population[i];
+            int city2;
+            if(i==population.length-1) city2 = 1;
+            else city2 = population[i+1];
+
+            distance += distanceTable[city1-1][city2-1];
+
+        }
+
+        return distance;
     }
 
 
@@ -208,6 +311,17 @@ public class TSP {
         if(debugOutput) outputCities();
         calculate();
         visualization();
+
+//        Integer[] test = new Integer[10];
+//
+//        test[0] = 200;
+//        test[3] = 5;
+//        test[4] = 127;
+//        test[8] = 0;
+//
+//        if(existsInArray(test,500)) System.out.println("Yes");
+//        else System.out.println("no");
+
 
     }
 
@@ -223,17 +337,19 @@ public class TSP {
         return result;
     }
 
-    public static int calculateDistanceSquare(int x1, int y1, int x2, int y2){   //avoid calculating sqrt saves a huge amount of time
+    public static int calculateDistance(int x1, int y1, int x2, int y2){
         if(x1 == x2){
             if(y1 == y2)
                 return 0;
             else
-                return Math.abs(y1 - y2) * Math.abs(y1 - y2);
+//                return Math.abs(y1 - y2) * Math.abs(y1 - y2);
+            return Math.abs(y1-y2);
         }else{
             if(y1 == y2)
-                return Math.abs(x1 - x2) * Math.abs(x1 - x2);
+//                return Math.abs(x1 - x2) * Math.abs(x1 - x2);
+            return Math.abs(x1-x2);
             else
-                return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+                return (int) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
         }
     }
 
@@ -266,19 +382,19 @@ public class TSP {
         }
     }
 
-    private void calculateDistanceSquareTable(){
-        distanceSquareTable = new Integer[numOfCities][numOfCities];
+    private void calculateDistanceTable(){
+        distanceTable = new Integer[numOfCities][numOfCities];
 
         for(int i=0;i<numOfCities;i++){
             for(int j=0;j<i;j++){
-                if(i==j) distanceSquareTable[i][j]=0;
+                if(i==j) distanceTable[i][j]=0;
                 else{
                     City tmp1 = citiesList[i];
                     City tmp2 = citiesList[j];
-                    int distance =  calculateDistanceSquare(tmp1.x,tmp1.y,tmp2.x,tmp2.y);
+                    int distance =  calculateDistance(tmp1.x,tmp1.y,tmp2.x,tmp2.y);
 
-                    distanceSquareTable[i][j] = distance;
-                    distanceSquareTable[j][i] = distance;
+                    distanceTable[i][j] = distance;
+                    distanceTable[j][i] = distance;
 
                 }
 
