@@ -9,13 +9,19 @@ import java.util.*;
 public class TSP {
 
     public static String fileName ;
+
+    public static final double crossoverRate=1.0;
+    public static final double mutationRate=0.05;
+
+    public static final int numOfGeneration = 20000;
+
     public Integer numOfCities = 0;
     public static City[] citiesList;
-    public static Integer[] edgesList;
+    public static Integer[] edgesList;    //chromosome
     public static Integer[][] distanceTable;
     public EdgeWeightType edgeWeightType;
 
-    public Integer populationSize = 5000;
+    public Integer populationSize = 100;
     public HashMap<Integer, Integer[]> populationPool;
 
     public static boolean debugFileChooser = true;
@@ -154,6 +160,21 @@ public class TSP {
 //        edgesList = randomGenerationAPopulation();
 
         createPopulationPool();
+        for(int i=0;i<numOfGeneration;i++){   //crossover 10 times
+            crossover(populationPool,crossoverRate);
+            for(int j=0;j<numOfCities;j++){
+                if(Math.random()<=mutationRate){   //determine if mutate or not
+                    mutation(populationPool.get(j));
+                    if(debugOutput) System.out.println("Mutation happened at " + (i + 1) + " Generation's " + j + " population");
+                }
+            }
+        }
+
+        edgesList = populationPool.get(0);
+        System.out.println("Total distance: "+getTotalDistance(edgesList));
+//        System.out.println(integerArrayToString(edgesList));
+
+
     }
 
     private Integer[] randomGenerationAPopulation(){
@@ -181,12 +202,12 @@ public class TSP {
             populationPool.put(i,randomGenerationAPopulation());
         }
         System.out.println("Generate the first generation successfully.");
-
-        int getLocation = random.nextInt(populationSize +1);
-        edgesList = populationPool.get(getLocation);
-
-        System.out.println("Get the population of " + getLocation);
-        System.out.println("Total distance = " + getTotalDistance(edgesList));
+//
+//        int getLocation = random.nextInt(populationSize +1);
+//        edgesList = populationPool.get(getLocation);
+//
+//        System.out.println("Get the population of " + getLocation);
+//        System.out.println("Total distance = " + getTotalDistance(edgesList));
     }
 
     private boolean existsInArray(Integer[] arr, Integer i){
@@ -292,15 +313,21 @@ public class TSP {
     public static Integer getTotalDistance(Integer[] population){
         Integer distance = 0;
 
-        for(int i=0;i<population.length;i++){
-            int city1 = population[i];
-            int city2;
-            if(i==population.length-1) city2 = 1;
-            else city2 = population[i+1];
+        try{
+            for(int i=0;i<population.length;i++){
+                int city1 = population[i];
+                int city2;
+                if(i==population.length-1) city2 = population[0];
+                else city2 = population[i+1];
 
-            distance += distanceTable[city1-1][city2-1];
+                distance += distanceTable[city1-1][city2-1];
 
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
+
+
 
         return distance;
     }
@@ -311,16 +338,6 @@ public class TSP {
         if(debugOutput) outputCities();
         calculate();
         visualization();
-
-//        Integer[] test = new Integer[10];
-//
-//        test[0] = 200;
-//        test[3] = 5;
-//        test[4] = 127;
-//        test[8] = 0;
-//
-//        if(existsInArray(test,500)) System.out.println("Yes");
-//        else System.out.println("no");
 
 
     }
