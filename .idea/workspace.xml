@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$EdgeWeightType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" afterPath="$PROJECT_DIR$/TSP/test/TSP$FileProcessor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/test/TSP.class" afterPath="$PROJECT_DIR$/TSP/test/TSP.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/src/ElitismComparator.java" afterPath="$PROJECT_DIR$/TSP/src/ElitismComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TSP/src/TSP.java" afterPath="$PROJECT_DIR$/TSP/src/TSP.java" />
     </list>
     <ignored path="TSP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,13 +31,21 @@
       <file leaf-file-name="TSP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2172">
-              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+            <state relative-caret-position="450">
+              <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4685#4686#0" expanded="true" />
-                <element signature="e#4754#4755#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ElitismComparator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TSP/src/ElitismComparator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,8 +53,8 @@
       <file leaf-file-name="Frame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TSP/src/Frame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="333">
+              <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,7 +95,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="origin/GACalatulation/createFirstGeneration" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -97,6 +110,8 @@
         <option value="$PROJECT_DIR$/TSP/src/Displayer.java" />
         <option value="$PROJECT_DIR$/TSP/src/Edge.java" />
         <option value="$PROJECT_DIR$/TSP/src/Frame.java" />
+        <option value="$PROJECT_DIR$/TSP/src/elitismComparator.java" />
+        <option value="$PROJECT_DIR$/TSP/src/ElitismComparator.java" />
         <option value="$PROJECT_DIR$/TSP/src/TSP.java" />
       </list>
     </option>
@@ -144,6 +159,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -179,18 +195,14 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="FullScreen" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="plugin&#9;PSI&#9;JAVA://com.sun.source.util.Plugin" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="GO_FMT" value="false" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunManager" selected="Application.TSP">
     <configuration default="false" name="TSP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -414,6 +426,26 @@
       <option name="trusted" value="true" />
       <method />
     </configuration>
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoRunFileConfiguration" factoryName="Go Single File">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
+      <method />
+    </configuration>
     <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -634,9 +666,6 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="2 Threads established:&#10;    1. FileReaderRunnable Thread: read file and save data into memory&#10;    2. OutputRunnable Thread: print all cities' locations to console">
       <created>1477800753343</created>
@@ -666,48 +695,48 @@
       <option name="project" value="LOCAL" />
       <updated>1477810523263</updated>
     </task>
-    <task id="LOCAL-00005" summary="Now user can use JFileChooser to choose the file.&#10;debugFileChooser: &#10;    true -- use default file path while debugging&#10;    false -- use JFileChooser to choose the file">
-      <created>1477858443747</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="" />
+      <created>1477882560591</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1477882560591</updated>
+      <workItem from="1477882561996" duration="6900000" />
+      <workItem from="1477945560180" duration="11387000" />
+    </task>
+    <task id="LOCAL-00005" summary="First step of  GA done.&#10;    The first generation of population has been created, and they are stored into HashMap populationPool.&#10;        The first generation is random generated.">
+      <created>1477884824057</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1477858443748</updated>
+      <updated>1477884824057</updated>
     </task>
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="01727f03-1eda-47c5-b3c9-5e4e1fdddec4" name="Default" comment="" />
-      <created>1477876589122</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1477876589122</updated>
-      <workItem from="1477876593845" duration="1361000" />
-      <workItem from="1477879128506" duration="2726000" />
-    </task>
-    <task id="LOCAL-00006" summary="comment randomGenerate code.">
-      <created>1477879807578</created>
+    <task id="LOCAL-00006" summary="First step of  GA done.&#10;    The first generation of population has been created, and they are stored into HashMap populationPool.&#10;        The first generation is random generated.">
+      <created>1477885028271</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1477879807578</updated>
+      <updated>1477885028271</updated>
     </task>
-    <task id="LOCAL-00007" summary="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!">
-      <created>1477880267216</created>
+    <task id="LOCAL-00007" summary="New features:&#10;    1. Program will generate a table which contains the square of distance between every cities.(Avoid calculating sqrt saves a lot of time)&#10;    2. TODO List created.">
+      <created>1477890985474</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1477880267216</updated>
+      <updated>1477890985474</updated>
     </task>
-    <task id="LOCAL-00008" summary="Separate the randomGeneration algorithm, will be used in generating the first generation">
-      <created>1477881947268</created>
+    <task id="LOCAL-00008" summary="New features:&#10;    1. crossover(UOX double the population) and elitism(kill half of the population) done.&#10;    2. mutation function done.&#10;    3. add ElitismComparator class which is used in the elitismQueue">
+      <created>1478119864880</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1477881947268</updated>
+      <updated>1478119864880</updated>
     </task>
     <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18271000" />
+    <option name="totallyTimeSpent" value="31974000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -729,13 +758,14 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3192771" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5120482" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21244635" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -746,7 +776,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -782,15 +811,14 @@
     <MESSAGE value="2 Threads established:&#10;    1. FileReaderRunnable Thread: read file and save data into memory&#10;    2. OutputRunnable Thread: print all cities' locations to console" />
     <MESSAGE value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;New features:&#10;    1. New class Frame added.&#10;    2. New class Edge added.&#10;    3. 2 More Threads added, totally 4 threads" />
     <MESSAGE value="Visualization done.&#10;DisplayThread now can display the cities with tags and edges which are in the edgesList.&#10;&#10;Changes:&#10;    1. Edge Class removed, Integer[] edgesList instead.&#10;    2. edgesList contains the tags of cities in the way.&#10;    3. CalculateThread contains a random-generate-algorithm to create a random edgeList." />
-    <MESSAGE value="Now user can use JFileChooser to choose the file.&#10;debugFileChooser: &#10;    true -- use default file path while debugging&#10;    false -- use JFileChooser to choose the file" />
-    <MESSAGE value="comment randomGenerate code." />
-    <MESSAGE value="remove all Threads, use Main Thread ONLY!&#10;To keep code clean and easy to understand!" />
-    <MESSAGE value="Separate the randomGeneration algorithm, will be used in generating the first generation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Separate the randomGeneration algorithm, will be used in generating the first generation" />
+    <MESSAGE value="First step of  GA done.&#10;    The first generation of population has been created, and they are stored into HashMap populationPool.&#10;        The first generation is random generated." />
+    <MESSAGE value="New features:&#10;    1. Program will generate a table which contains the square of distance between every cities.(Avoid calculating sqrt saves a lot of time)&#10;    2. TODO List created." />
+    <MESSAGE value="New features:&#10;    1. crossover(UOX double the population) and elitism(kill half of the population) done.&#10;    2. mutation function done.&#10;    3. add ElitismComparator class which is used in the elitismQueue" />
+    <option name="LAST_COMMIT_MESSAGE" value="New features:&#10;    1. crossover(UOX double the population) and elitism(kill half of the population) done.&#10;    2. mutation function done.&#10;    3. add ElitismComparator class which is used in the elitismQueue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="28" />
+      <option name="time" value="64" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -805,16 +833,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4685#4686#0" expanded="true" />
-            <element signature="e#4754#4755#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/Frame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="600">
+          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -843,15 +869,13 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4685#4686#0" expanded="true" />
-            <element signature="e#4754#4755#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/Frame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
+        <state relative-caret-position="675">
           <caret line="45" column="55" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -896,14 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TSP/src/att48.tsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/Edge.java" />
     <entry file="file://$PROJECT_DIR$/TSP/src/City.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -913,31 +929,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TSP/src/att48.tsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/Frame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="333">
+          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/com/sun/source/util/Plugin.java">
+    <entry file="file://$PROJECT_DIR$/TSP/src/ElitismComparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+        <state relative-caret-position="180">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TSP/src/TSP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2172">
-          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        <state relative-caret-position="450">
+          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4685#4686#0" expanded="true" />
-            <element signature="e#4754#4755#0" expanded="true" />
           </folding>
         </state>
       </provider>

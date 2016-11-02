@@ -44,10 +44,11 @@ public class Frame extends JFrame {
                 City tmp2;
                 if(i == edgesList.length-1) tmp2 = citiesList[edgesList[0]-1];
                 else tmp2 = citiesList[edgesList[i+1]-1];
-                System.out.println("From City " + tmp1.tag + " to City " + tmp2.tag);
+                if(TSP.debugOutput) System.out.println("From City " + tmp1.tag + " to City " + tmp2.tag);
                 g.drawLine(tmp1.x/10+60, tmp1.y/10+30, tmp2.x/10+60, tmp2.y/10+30);
 
             }
+            System.out.println("edgesList: "+TSP.integerArrayToString(edgesList));
             System.out.println("Number of edges: " + numOfEdges);
 
         }

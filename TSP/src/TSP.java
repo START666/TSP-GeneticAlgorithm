@@ -9,15 +9,23 @@ import java.util.*;
 public class TSP {
 
     public static String fileName ;
+
+    public static final double crossoverRate=1.0;
+    public static final double mutationRate=0.05;
+
+    public static final int numOfGeneration = 20000;
+
     public Integer numOfCities = 0;
     public static City[] citiesList;
-    public static Integer[] edgesList;
+    public static Integer[] edgesList;    //chromosome
+    public static Integer[][] distanceTable;
     public EdgeWeightType edgeWeightType;
 
-    public Integer numOfPopulation = 100;
+    public Integer populationSize = 100;
     public HashMap<Integer, Integer[]> populationPool;
 
-    private boolean debugFileChooser = true;
+    public static boolean debugFileChooser = true;
+    public static boolean debugOutput = false;
     private int cityStartLine;
     private ArrayList<String> file = new ArrayList<>();
     private Random random;
@@ -107,6 +115,7 @@ public class TSP {
                 cityStartLine = lineNumber+1;
             }
         }
+
     }
 
     private void readFile(){
@@ -128,6 +137,7 @@ public class TSP {
         fp.readFile(fileName);
 
         buildCityList();
+        calculateDistanceTable();
 
         System.out.println("Total "+numOfCities+" number of cities have been saved.");
 
@@ -141,11 +151,29 @@ public class TSP {
     }
 
     private void visualization(){
-        Frame frame = new Frame(900,600,citiesList,edgesList);
+        if(citiesList != null && edgesList != null){
+            Frame frame = new Frame(900,600,citiesList,edgesList);
+        }
     }
 
     private void calculate(){
-        edgesList = randomGenerationAPopulation();
+//        edgesList = randomGenerationAPopulation();
+
+        createPopulationPool();
+        for(int i=0;i<numOfGeneration;i++){   //crossover 10 times
+            crossover(populationPool,crossoverRate);
+            for(int j=0;j<numOfCities;j++){
+                if(Math.random()<=mutationRate){   //determine if mutate or not
+                    mutation(populationPool.get(j));
+                    if(debugOutput) System.out.println("Mutation happened at " + (i + 1) + " Generation's " + j + " population");
+                }
+            }
+        }
+
+        edgesList = populationPool.get(0);
+        System.out.println("Total distance: "+getTotalDistance(edgesList));
+//        System.out.println(integerArrayToString(edgesList));
+
 
     }
 
@@ -168,19 +196,178 @@ public class TSP {
     }
 
     private void createPopulationPool(){
-        // TODO: 2016/10/30 random generate the first generation
         populationPool = new HashMap<>();
+
+        for(int i = 0; i< populationSize; i++){
+            populationPool.put(i,randomGenerationAPopulation());
+        }
+        System.out.println("Generate the first generation successfully.");
+//
+//        int getLocation = random.nextInt(populationSize +1);
+//        edgesList = populationPool.get(getLocation);
+//
+//        System.out.println("Get the population of " + getLocation);
+//        System.out.println("Total distance = " + getTotalDistance(edgesList));
+    }
+
+    private boolean existsInArray(Integer[] arr, Integer i){
+
+        boolean isNull = (i==null);
+
+        for(Integer m : arr){
+            if(isNull){
+                if (m==null) return true;
+            }else{
+                if(m==null) continue;
+                if(m.equals(i)) return true;
+            }
+        }
+
+        return false;
+
+    }
+    
+    private void crossover(HashMap<Integer, Integer[]> populationPool, double rate){  //crossover and elitism
+
+        PriorityQueue<Integer[]> elitismQueue = new PriorityQueue<>(numOfCities*2,new ElitismComparator());
+
+        for(int i=0;i<populationPool.size()/2;i++){
+            if(Math.random() <= rate){
+
+                Random maskGenerator = new Random();
+
+                Integer population1 = random.nextInt(populationPool.size());
+                Integer population2 = random.nextInt(populationPool.size());
+
+                while(population1.equals(population2)) population2 = random.nextInt(populationPool.size());
+
+                Integer[] parent1 = populationPool.get(population1);
+                Integer[] parent2 = populationPool.get(population2);
+
+                Integer[] child1 = new Integer[numOfCities];
+                Integer[] child2 = new Integer[numOfCities];
+
+                for(int c=0;c<numOfCities;c++){   //copy to child if mask is true
+                    if(maskGenerator.nextBoolean()){  //if mask is true, copy from parent
+                        child1[c] = parent1[c];
+                        child2[c] = parent2[c];
+                    }
+                }
+
+
+                int iterator1 = 0;
+                int iterator2 = 0;
+                for(int c=0;c<numOfCities;c++){   //copy from other parent if not exists
+                    if(child1[c]==null){   //if child1[c] is null then child2[c] must be null
+
+                        while(existsInArray(child1,parent2[iterator2])){  //if exists in child1, move to next
+                            if(iterator2 < numOfCities) iterator2++;
+                            else iterator2 = 0;
+                        }
+
+                        while(existsInArray(child2,parent1[iterator1])){  //if exists in child2, move to next
+                            if(iterator1 < numOfCities) iterator1++;
+                            else iterator1 = 0;
+                        }
+
+                        child1[c] = parent2[iterator2];
+                        child2[c] = parent1[iterator1];
+
+                        iterator1++;
+                        iterator2++;
+
+                    }
+                }
+
+                elitismQueue.offer(child1);
+                elitismQueue.offer(child2);
+            }
+        }
+        for(int i=0;i<numOfCities;i++)  //put all parents to elitismQueue
+            elitismQueue.offer(populationPool.get(i));
+
+        populationPool = new HashMap<>();
+
+        for(int i=0;i<numOfCities;i++){   //use the best half of the elitismQueue to create the new populationPool
+            populationPool.put(i,elitismQueue.poll());
+        }
+
+    }
+    
+    private boolean mutation(Integer[] population){
+        if(population == null) return false;
+
+        Integer location1 = random.nextInt(population.length);
+        Integer location2 = random.nextInt(population.length);
+
+        while(location1.equals(location2)) location2 = random.nextInt(population.length);
+
+        //swap 2 cities
+        population[location1] += population[location2];
+        population[location2] = population[location1] - population[location2];
+        population[location1] = population[location1] - population[location2];
+
+        return true;
+    }
+    
+    public static Integer getTotalDistance(Integer[] population){
+        Integer distance = 0;
+
+        try{
+            for(int i=0;i<population.length;i++){
+                int city1 = population[i];
+                int city2;
+                if(i==population.length-1) city2 = population[0];
+                else city2 = population[i+1];
+
+                distance += distanceTable[city1-1][city2-1];
+
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return distance;
+    }
+
+
+    public TSP(){   // Main constructor
+        readFile();
+        if(debugOutput) outputCities();
+        calculate();
+        visualization();
 
 
     }
 
+    public static String integerArrayToString(Integer[] array){
+        if(array==null) return "";
+        String result = "[ ";
+        for(int i=0;i<array.length;i++){
+            if(array[i] != null) result += array[i].toString();
+            else result += "null";
+            if(i != array.length-1) result += ", ";
+            else result += " ]";
+        }
+        return result;
+    }
 
-    public TSP(){
-        readFile();
-        outputCities();
-        calculate();
-        visualization();
-
+    public static int calculateDistance(int x1, int y1, int x2, int y2){
+        if(x1 == x2){
+            if(y1 == y2)
+                return 0;
+            else
+//                return Math.abs(y1 - y2) * Math.abs(y1 - y2);
+            return Math.abs(y1-y2);
+        }else{
+            if(y1 == y2)
+//                return Math.abs(x1 - x2) * Math.abs(x1 - x2);
+            return Math.abs(x1-x2);
+            else
+                return (int) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        }
     }
 
     private void buildCityList(){
@@ -210,6 +397,27 @@ public class TSP {
 //            System.out.println("City "+tag+" has been saved" );
 
         }
+    }
+
+    private void calculateDistanceTable(){
+        distanceTable = new Integer[numOfCities][numOfCities];
+
+        for(int i=0;i<numOfCities;i++){
+            for(int j=0;j<i;j++){
+                if(i==j) distanceTable[i][j]=0;
+                else{
+                    City tmp1 = citiesList[i];
+                    City tmp2 = citiesList[j];
+                    int distance =  calculateDistance(tmp1.x,tmp1.y,tmp2.x,tmp2.y);
+
+                    distanceTable[i][j] = distance;
+                    distanceTable[j][i] = distance;
+
+                }
+
+            }
+        }
+
     }
 
     public static void main(String args[]){new TSP();}
