@@ -21,7 +21,7 @@ public class TSP {
     public static Integer[][] distanceTable;
     public EdgeWeightType edgeWeightType;
 
-    public Integer populationSize = 100;
+    public Integer populationSize = 1000;
     public HashMap<Integer, Integer[]> populationPool;
 
     public static boolean debugFileChooser = true;
@@ -170,8 +170,21 @@ public class TSP {
             }
         }
 
-        edgesList = populationPool.get(0);
+        PriorityQueue<Integer[]> getBestPopulation = new PriorityQueue<>(populationSize, new ElitismComparator());
+        for(int i=0;i<populationSize;i++){
+            getBestPopulation.offer(populationPool.get(i));
+        }
+
+        edgesList = getBestPopulation.poll();
+
+        Integer[] worst;
+
+        do{
+            worst = getBestPopulation.poll();
+        }while(!getBestPopulation.isEmpty());
+
         System.out.println("Total distance: "+getTotalDistance(edgesList));
+        System.out.println("Worst total distance in this generation: " + getTotalDistance(worst));
 //        System.out.println(integerArrayToString(edgesList));
 
 
